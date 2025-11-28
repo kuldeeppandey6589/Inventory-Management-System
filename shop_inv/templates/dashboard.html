@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <h2>Dashboard</h2>
+  <div class="actions">
+    <a class="btn" href="{% url 'catalog:product_list' %}">View Products</a>
+    <a class="btn" href="{% url 'inventory:view_stock' %}">View Stocks</a>
+    <a class="btn" href="{% url 'sales:invoice_list' %}">View Invoices</a>
+    <a class="btn" href="{% url 'sales:invoice_create' %}">+ New Invoice</a>
+  </div>
+  <p>Total products: <a href="{% url 'catalog:product_list' %}"><span class="badge">{{ stats.total_products}}</span></a>
+  </p>
+  <p>Total invoices: <a href="{% url 'sales:invoice_list' %}"><span class="badge">{{ stats.total_invoices }}</span></a>
+  </p>
+  <p>Today’s sales: <span class="badge">₹ {{ stats.today_total }}</span></p>
+</div>
+
+
+{% endblock %}

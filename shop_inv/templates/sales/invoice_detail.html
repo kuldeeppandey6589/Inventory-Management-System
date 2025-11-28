@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Invoice {{ invoice.number }}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2 style="text-align: center;">SVN Enterprises</h2>
+  <pre style="text-align: center;"><h3>Address: 288/177, Arya Nagar, Charbagh,
+  Lucknow, Uttar Pradesh 226004.
+Phone: 095607 73418.</h3></pre>
+  <hr>
+  <h3>GST No: 09AKRPC9980A1ZU</h3>
+  <h3>Invoice: {{ invoice.number }}</h3>
+  <p><strong>Date:</strong> {{ invoice.date|date:"Y-m-d H:i" }}</p>
+  <p><strong>Customer:</strong> {{ invoice.customer|default:"Cash Customer" }}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Unit</th>
+        <th>Discount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for line in invoice.lines.all %}
+      <tr>
+        <td>{{ line.product.name }}</td>
+        <td>{{ line.qty }}</td>
+        <td>₹ {{ line.unit_price }}</td>
+        <td>₹ {{ line.discount_amount }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="card">
+    <div>
+      <p>Subtotal: ₹ {{ invoice.subtotal }}</p>
+      {% if invoice.is_interstate %}<p>IGST: ₹ {{ invoice.igst }}</p>
+      {% else %}<p>CGST: ₹ {{ invoice.cgst }} &nbsp; SGST: ₹ {{ invoice.sgst }}</p>{% endif %}
+      <h3>Grand Total: ₹ {{ invoice.grand_total }}</h3>
+    </div>
+
+  </div>
+
+  <div style="float: right; padding: 10px;">
+    <h3>SVN Enterprises</h3>
+  </div>
+
+  <div class="actions"><a class="btn" onclick="window.print()">Print</a> <a class="btn"
+      href="{% url 'sales:invoice_list' %}">Back</a></div>
+</div>
+{% endblock %}

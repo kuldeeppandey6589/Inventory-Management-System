@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Stock
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h2>Add Stock</h2>
+    <div class="card">
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <label>Product</label>
+            <select name="product" required>
+                <option value="">-- select --</option>
+                {% for p in products %}
+                <option value="{{ p.id }}">{{ p.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="">Quantity To Add</label>
+            <input type="number" name="quantity_on_hand" min="1" required>
+
+            <div class="actions" style="margin-top: 20px;">
+                <button type="submit">Update Stock</button>
+                <a class="btn" href="{% url 'inventory:view_stock' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

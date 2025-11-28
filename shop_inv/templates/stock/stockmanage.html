@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Stock Movements
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    <center>
+       <u> Stock Movements</u>  
+    </center>
+</h1>
+<div class="card">
+    <div class="actions">
+    <a href="{% url 'inventory:add_stock' %}" class="btn">+ Add Stock</a>
+    <a class="btn" href="{% url 'inventory:view_stock' %}">View Stock</a>
+  </div><br>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Qty.</th>
+            <th>Reason</th>
+            <th>Reference</th>
+            <th>Date & Time</th>
+        </tr>
+       <tbody>
+             {% for s in stock %}
+        <tr>
+            
+            <td>{{s.product}}</td>
+            <td>{{s.qty}}</td>
+            <td>{{s.reason}}</td>
+            <td>{{s.reference}}</td>
+            <td>{{s.datetime}}</td>
+        </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+</div>
+{% endblock %}
