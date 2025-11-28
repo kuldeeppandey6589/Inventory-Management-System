@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Stock Manage
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>Stock Management</h2>
+  <div class="actions">
+    <a href="{% url 'inventory:add_stock' %}" class="btn">+ Add Stock</a>
+    <a href="{% url 'catalog:product_create' %}" class="btn">+ Add Product</a>
+  </div>
+  <table style="text-align: center;">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity On Hand</th>
+      </tr>
+    <tbody>
+      {% for s in viewstock %}
+      <tr>
+        <td>{{s.product}}</td>
+        <td>{{s.quantity_on_hand}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </thead>
+  </table>
+</div>
+{% endblock %}

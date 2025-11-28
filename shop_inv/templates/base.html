@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Inventory{% endblock %}</title> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+</head>
+
+<body>
+  <div class="nav">
+    <div class="container">
+      <a href="{% url 'frontend:dashboard' %}"><strong>🏪 Inventory</strong></a>
+      <a href="{% url 'inventory:view_stock' %}">Stock</a>
+      <a href="{% url 'catalog:product_list' %}">Products</a>
+      <a href="{% url 'sales:invoice_list' %}">Invoices</a>
+      <a href="{% url 'inventory:stockmanage' %}">Stock Management</a>
+      <a href="/admin/">Admin</a>
+      <a href="/logout/"><i class="fa-solid fa-right-from-bracket"></i></a>
+    </div>
+  </div>
+  <div class="container">{% block content %}{% endblock %}<div class="footer">@Science Hobby Center</div>
+  </div>
+</body>
+
+</html>

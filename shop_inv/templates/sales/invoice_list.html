@@ -1,0 +1,27 @@
+{% extends 'base.html' %}{% block title %}Invoices{% endblock %}{% block content %}
+<div class="card">
+  <h2>Invoices</h2>
+  <div class="actions"><a class="btn" href="{% url 'sales:invoice_create' %}">+ New Invoice</a></div>
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Date</th>
+        <th>Customer</th>
+        <th>Total</th>
+        <th colspan="2" style="text-align: center;">Action</th>
+      </tr>
+    </thead>
+    <tbody>{% for inv in page %}<tr>
+        <td>{{ inv.number }}</td>
+        <td>{{ inv.date|date:"Y-m-d H:i" }}</td>
+        <td>{{ inv.customer|default:"Cash" }}</td>
+        <td>₹ {{ inv.grand_total }}</td>
+        <td><a class="btn" href="{% url 'sales:invoice_detail' inv.pk %}">Open</a></td>
+        <td><a class="btn" style="background-color: rgb(192, 16, 16); color: white;" href="{% url 'sales:delinv' inv.pk %}">Delete</a></td>
+      </tr>{% empty %}<tr>
+        <td colspan="5">No invoices yet.</td>
+      </tr>{% endfor %}</tbody>
+  </table>
+</div>
+{% endblock %}
